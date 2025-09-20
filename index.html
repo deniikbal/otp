@@ -2,50 +2,52 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<title>Follow @danie_lung</title>
-<style>
-    body {font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: #f7f7fb; color: #0f172a; padding: 16px;}
-    h1 {color: #0f172a; font-size: 20px; font-weight: 700; margin: 0 0 12px 0;}
-    p {font-family: ui-sans-serif, system-ui; color: #475569;}
-    .container {background: #ffffff; padding: 16px; border-radius: 12px; max-width: 40rem; margin: auto; box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06); border: 1px solid #eef2f7;}
-    input[type="file"], input[type="text"] {margin-top: 8px; padding: 10px 12px; font-family: ui-sans-serif, system-ui; border: 1px solid #e2e8f0; border-radius: 10px; background: #f8fafc; width: 100%; box-sizing: border-box; outline: none; transition: border-color .15s ease, box-shadow .15s ease;}
-    input[type="text"]::placeholder {color: #94a3b8;}
-    input[type="file"]:focus, input[type="text"]:focus {border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.15); background: #fff;}
-    #output {background: #0b1220; color: #7cfcc6; padding: 14px; border-radius: 10px; margin-top: 14px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; white-space: pre-wrap; max-height: 360px; overflow-y: auto; border: 1px solid #0f1a33;}
-    button {margin-top: 12px; padding: 10px 14px; background: #111827; color: white; border: 0; border-radius: 10px; cursor: pointer; font-weight: 600; letter-spacing: .2px; transition: transform .05s ease, background .2s ease, box-shadow .2s ease; box-shadow: 0 6px 16px rgba(2,6,23,.12);} 
-    button:hover {background: #0b1220;}
-    button:active {transform: translateY(1px);} 
-    .radio-group {display: flex; gap: 10px; margin: 8px 0 2px 0; flex-wrap: wrap; align-items: center;}
-    .radio-group p {margin: 0 8px 0 0; font-size: 13px; color: #334155;}
-    .radio-group label {display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: .15s ease; background: #f1f5f9; padding: 6px 10px; border-radius: 9999px; border: 1px solid #e2e8f0; font-size: 13px; color: #0f172a;}
-    .radio-group label:hover {background: #e2e8f0;}
-    .radio-group input[type="radio"] {accent-color: #111827; transform: scale(1.05);} 
-    hr {border: 0; height: 1px; background: #eef2f7; margin: 14px 0;}
-    .section-title {font-size: 13px; font-weight: 700; color: #0f172a; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: .08em;}
-</style>
+<title>Bookmarklet</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-<div class="container">
-	<h1>⭐ Bookmarklet Kode OTP</h1>
-    <hr>
-    <h3 style="margin-bottom: 5px">👉 Generator Bookmarklet</h3>
-	<p style="margin-top:0">Bookmarklet ini berfungsi untuk menghasilkan kode OTP sesuai secret yang Anda masukkan. Kode OTP akan langsung terisi sesuai penggunaan OTP yang Anda buat.</p>
-    <input type="text" id="bookmarkletCode" placeholder="Masukkan Kode Secret">
-	<input type="text" id="bookmarkletNama" placeholder="Masukkan Nama Bookmarklet">
-	<div class="radio-group">
-		<p style="font-family: monospace, sans-serif;margin:0">Pilih Penggunaan OTP:</p>
-		<label><input type="radio" name="bmOption" value="kode2fa" checked> Dapodik</label>
-		<label><input type="radio" name="bmOption" value="infogtk"> InfoGtk</label>
-	</div>
-    <button onclick="generateBookmarklet()">Generate Bookmarklet</button>
-    <p style="margin: 24px 0;font-family: monospace, sans-serif">Bookmarklet: <a id="bookmarkletLink" href="#" target="_blank"></a></p>
-	<hr>
-    <h3 style="margin-bottom: 5px">👉 Google Authenticator QR Decoder</h3>
-    <p style="margin-top:0">Unggah gambar kode QR 2FA untuk mengekstrak akun dan secret-nya. Atau Anda bisa langsung menggunakan Generator Bookmarklet diatas jika sudah punya kode secret.</p>
-    <input type="file" id="fileInput" accept="image/*">
-    <pre id="output">Silakan Upload QR Google Authenticator</pre>
-</div>
+<body class="bg-gray-50">
+<div class="max-w-4xl mx-auto mt-10 bg-white rounded-xl shadow-lg p-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Kolom Kiri: Google Authenticator QR Decoder -->
+    <div class="space-y-4">
+      <h3 class="text-base font-semibold text-gray-700">Google Authenticator QR Decoder</h3>
+      <p class="text-xs text-gray-600">Unggah gambar QR 2FA untuk mengekstrak akun dan secret-nya.</p>
+      <input type="file" id="fileInput" accept="image/*" class="w-full px-2 py-1 border rounded focus:ring focus:ring-blue-400 text-sm">
+      <pre id="output" class="p-2 bg-gray-900 text-green-400 rounded h-24 overflow-y-auto border text-xs">Silakan Upload QR Google Authenticator</pre>
+    </div>
+    <!-- Kolom Kanan: Generator Bookmarklet -->
+    <div class="space-y-4">
+      <h3 class="text-base font-semibold text-gray-700">Generator Bookmarklet</h3>
+      <p class="text-xs text-gray-600">Bookmarklet ini menghasilkan kode OTP sesuai secret yang Anda masukkan.</p>
+      <div class="space-y-2">Bookmarklet Kode OTP
 
+        <!-- Ganti bagian input secret -->
+        <div class="relative">
+          <input type="password" id="bookmarkletCode" placeholder="Kode Secret" class="w-full px-2 py-1 border rounded focus:ring focus:ring-blue-400 text-sm">
+          <button type="button" onclick="toggleSecret()" class="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500">👁️</button>
+        </div>
+        <script>
+        function toggleSecret() {
+          const input = document.getElementById('bookmarkletCode');
+          if (input.type === 'password') {
+            input.type = 'text';
+          } else {
+            input.type = 'password';
+          }
+        }
+        </script>
+        <input type="text" id="bookmarkletNama" placeholder="Nama Bookmarklet" class="w-full px-2 py-1 border rounded focus:ring focus:ring-blue-400 text-sm">
+      </div>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="text-gray-500">Penggunaan OTP:</span>
+        <label class="flex items-center gap-1"><input type="radio" name="bmOption" value="kode2fa" checked> Dapodik</label>
+        <label class="flex items-center gap-1"><input type="radio" name="bmOption" value="infogtk"> InfoGtk</label>
+      </div>
+      <button onclick="generateBookmarklet()" class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:ring focus:ring-blue-400 text-sm">Generate</button>
+      <p class="text-xs text-gray-500">Bookmarklet: <a id="bookmarkletLink" href="#" target="_blank" class="text-blue-600 hover:underline"></a></p>
+    </div>
+  </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/protobufjs/dist/protobuf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 <script>
