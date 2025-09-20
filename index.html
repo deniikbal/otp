@@ -1,30 +1,74 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
 <meta charset="utf-8">
 <title>Bookmarklet</title>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+  .dark { background-color:#111827; }
+  .dark .bg-gray-50 { background-color:#111827; }
+  .dark .bg-white { background-color:#1f2937; }
+  .dark .text-gray-800 { color:#f3f4f6; }
+  .dark .text-gray-700 { color:#e5e7eb; }
+  .dark .text-gray-600 { color:#d1d5db; }
+  .dark .text-gray-500 { color:#9ca3af; }
+  .dark .border-gray-200 { border-color:#374151; }
+  .dark .border-gray-800 { border-color:#1f2937; }
+  .dark .bg-gray-900 { background-color:#111827; }
+  .dark .text-green-400 { color:#34d399; }
+  .dark .bg-blue-600 { background-color:#2563eb; }
+  .dark .hover\:bg-blue-700:hover { background-color:#1d4ed8; }
+  .dark .bg-black\/50 { background-color:rgba(0,0,0,0.7); }
+  .dark .accent-blue-600 { accent-color:#2563eb; }
+  .dark .shadow-md { box-shadow:0 4px 6px -1px rgba(0,0,0,0.4),0 2px 4px -2px rgba(0,0,0,0.4); }
+  .dark .shadow-sm { box-shadow:0 1px 2px 0 rgba(0,0,0,0.3); }
+  .dark .shadow-lg { box-shadow:0 10px 15px -3px rgba(0,0,0,0.4),0 4px 6px -4px rgba(0,0,0,0.4); }
+  .dark .from-blue-600 { --tw-gradient-from:#2563eb; --tw-gradient-to:#2563eb00; --tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to); }
+  .dark .to-indigo-600 { --tw-gradient-to:#4f46e5; }
+  .dark .hover\:from-blue-700:hover { --tw-gradient-from:#1d4ed8; --tw-gradient-to:#1d4ed800; --tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to); }
+  .dark .hover\:to-indigo-700:hover { --tw-gradient-to:#4338ca; }
+  .dark .text-blue-600 { color:#2563eb; }
+  .dark .hover\:text-blue-700:hover { color:#1d4ed8; }
+  .dark .text-gray-900 { color:#f9fafb; }
+  .dark .text-gray-200 { color:#e5e7eb; }
+  .dark .text-gray-300 { color:#d1d5db; }
+  .dark .text-gray-400 { color:#9ca3af; }
+  .dark .bg-gray-800 { background-color:#1f2937; }
+  .dark .border-gray-300 { border-color:#4b5563; }
+  .dark .focus\:ring-blue-400:focus { --tw-ring-color:#60a5fa; }
+  .dark .placeholder-gray-400::placeholder { color:#9ca3af; }
+</style>
 </head>
-<body class="bg-gray-50">
-<div class="max-w-4xl mx-auto mt-10 bg-white rounded-xl shadow-lg p-6">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<body class="bg-gray-50 text-gray-800 transition-colors duration-300">
+<div class="max-w-5xl mx-auto mt-6 bg-white rounded-xl shadow-md p-4 md:p-6 transition-all duration-300">
+  <div class="mb-4 flex items-center justify-between">
+    <h1 class="text-lg font-semibold tracking-tight text-gray-800">OTP Tools</h1>
+    <div class="flex items-center gap-3">
+      <span class="text-[11px] text-gray-500">Tailwind 4</span>
+      <button id="themeToggle" aria-label="Toggle Dark Mode" class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200">
+        <span class="dark:hidden">🌙</span>
+        <span class="hidden dark:inline">☀️</span>
+      </button>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <!-- Kolom Kiri: Google Authenticator QR Decoder -->
-    <div class="space-y-4">
-      <h3 class="text-base font-semibold text-gray-700">Google Authenticator QR Decoder</h3>
-      <p class="text-xs text-gray-600">Unggah gambar QR 2FA untuk mengekstrak akun dan secret-nya.</p>
-      <input type="file" id="fileInput" accept="image/*" class="w-full px-2 py-1 border rounded focus:ring focus:ring-blue-400 text-sm">
-      <pre id="output" class="p-2 bg-gray-900 text-green-400 rounded h-24 overflow-y-auto border text-xs">Silakan Upload QR Google Authenticator</pre>
+    <div class="rounded-lg border border-gray-200 bg-white p-4 space-y-3 transition-all duration-300">
+      <h3 class="text-sm font-semibold text-gray-800">Google Authenticator QR Decoder</h3>
+      <p class="text-[11px] text-gray-600">Unggah gambar QR 2FA untuk mengekstrak akun dan secret-nya.</p>
+      <input type="file" id="fileInput" accept="image/*" class="w-full px-2 py-1 border rounded focus:ring focus:ring-blue-400 text-sm transition-all duration-300">
+      <pre id="output" class="p-2 bg-gray-900 text-green-400 rounded h-28 overflow-y-auto border border-gray-800 font-mono text-xs transition-all duration-300">Silakan Upload QR Google Authenticator</pre>
     </div>
     <!-- Kolom Kanan: Generator Bookmarklet -->
-    <div class="space-y-4">
-      <h3 class="text-base font-semibold text-gray-700">Generator Bookmarklet</h3>
-      <p class="text-xs text-gray-600">Bookmarklet ini menghasilkan kode OTP sesuai secret yang Anda masukkan.</p>
-      <div class="space-y-2">Bookmarklet Kode OTP
-
+    <div class="rounded-lg border border-gray-200 bg-white p-4 space-y-3 transition-all duration-300">
+      <h3 class="text-sm font-semibold text-gray-800">Generator Bookmarklet</h3>
+      <p class="text-[11px] text-gray-600">Bookmarklet ini menghasilkan kode OTP sesuai secret yang Anda masukkan.</p>
+      <div class="space-y-2">
+        <div class="text-[11px] font-medium text-gray-500">Bookmarklet Kode OTP</div>
         <!-- Ganti bagian input secret -->
         <div class="relative">
-          <input type="password" id="bookmarkletCode" placeholder="Kode Secret" class="w-full px-2 py-1 border rounded focus:ring focus:ring-blue-400 text-sm">
-          <button type="button" onclick="toggleSecret()" class="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500">👁️</button>
+          <input type="password" id="bookmarkletCode" placeholder="Kode Secret" class="w-full px-2 py-1 pr-8 border rounded focus:ring focus:ring-blue-400 text-sm transition-all duration-300">
+          <button type="button" onclick="toggleSecret()" class="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 transition-colors duration-200">👁️</button>
         </div>
         <script>
         function toggleSecret() {
@@ -36,21 +80,45 @@
           }
         }
         </script>
-        <input type="text" id="bookmarkletNama" placeholder="Nama Bookmarklet" class="w-full px-2 py-1 border rounded focus:ring focus:ring-blue-400 text-sm">
+        <input type="text" id="bookmarkletNama" placeholder="Nama Bookmarklet" class="w-full px-2 py-1 border rounded focus:ring focus:ring-blue-400 text-sm transition-all duration-300">
       </div>
-      <div class="flex items-center gap-2 text-xs">
+      <div class="flex items-center gap-3 text-xs">
         <span class="text-gray-500">Penggunaan OTP:</span>
-        <label class="flex items-center gap-1"><input type="radio" name="bmOption" value="kode2fa" checked> Dapodik</label>
-        <label class="flex items-center gap-1"><input type="radio" name="bmOption" value="infogtk"> InfoGtk</label>
+        <label class="flex items-center gap-1 text-gray-700"><input class="accent-blue-600" type="radio" name="bmOption" value="kode2fa" checked> Dapodik</label>
+        <label class="flex items-center gap-1 text-gray-700"><input class="accent-blue-600" type="radio" name="bmOption" value="infogtk"> InfoGtk</label>
       </div>
-      <button onclick="generateBookmarklet()" class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:ring focus:ring-blue-400 text-sm">Generate</button>
-      <p class="text-xs text-gray-500">Bookmarklet: <a id="bookmarkletLink" href="#" target="_blank" class="text-blue-600 hover:underline"></a></p>
+      <button onclick="generateBookmarklet()" class="w-full py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded shadow-sm hover:from-blue-700 hover:to-indigo-700 focus:ring focus:ring-blue-400 text-sm transition-all duration-300">Generate</button>
+      <p class="text-xs text-gray-500">Bookmarklet: <a id="bookmarkletLink" href="#" target="_blank" class="text-blue-600 hover:underline truncate inline-block max-w-full align-middle transition-colors duration-200"></a></p>
+    </div>
+  </div>
+</div>
+<!-- Modal Notifikasi -->
+<div id="appModal" class="fixed inset-0 z-50 hidden items-center justify-center transition-opacity duration-300">
+  <div class="absolute inset-0 bg-black/50" onclick="closeModal()"></div>
+  <div class="relative bg-white w-80 max-w-[90vw] rounded-lg shadow-lg p-4 transition-all duration-300 dark:bg-gray-800 dark:text-gray-200">
+    <div id="appModalMessage" class="text-sm text-gray-700 dark:text-gray-200">Masukkan nama bookmark terlebih dahulu.</div>
+    <div class="mt-4 text-right">
+      <button type="button" class="px-3 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-sm transition-colors duration-200" onclick="closeModal()">OK</button>
     </div>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/protobufjs/dist/protobuf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
 <script>
+// Dark mode toggle
+document.getElementById('themeToggle').addEventListener('click', () => {
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+});
+// Load saved theme
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+});
+
 document.getElementById('fileInput').addEventListener('change', handleFile);
 
 function handleFile(evt) {
@@ -187,6 +255,30 @@ function base32Encode(bytes) {
     return output;
 }
 
+// Modal helper
+function showModal(message) {
+  const modal = document.getElementById('appModal');
+  const messageEl = document.getElementById('appModalMessage');
+  if (messageEl && typeof message === 'string' && message.length) {
+    messageEl.textContent = message;
+  }
+  if (modal) {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+}
+function closeModal() {
+  const modal = document.getElementById('appModal');
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+}
+// Tutup modal dengan tombol Escape
+window.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeModal();
+});
+
 function generateBookmarklet() {
     const code = document.getElementById("bookmarkletCode").value.trim();
 	const namacode = document.getElementById("bookmarkletNama").value.trim();
@@ -205,8 +297,8 @@ function generateBookmarklet() {
 		alert("Masukkan kode secret terlebih dahulu.");
         return;
     } else if (!namacode) {
-		alert("Masukkan nama bookmark terlebih dahulu.");
-		return;
+        showModal("Masukkan nama bookmark terlebih dahulu.");
+        return;
 	}
     const bookmarklet = "javascript:(function(){" + encodeURIComponent(jsCode) + "})();";
     const link = document.getElementById("bookmarkletLink");
