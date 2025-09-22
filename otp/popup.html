@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>OTP Manager</title>
+		<link rel="stylesheet" href="popup.css">
+	</head>
+	<body>
+		<div class="header-links">OTP Manager</div>
+
+		<div class="toolbar">
+			<button id="uploadQR">Upload QR</button>
+			<input type="file" id="fileInput" accept="image/*" style="display:none">
+			<button id="scanTab">Scan active tab</button>
+			<button id="addManual">Add manual</button>
+		</div>
+
+		<div class="toolbar-secondary">
+			<button id="exportBtn">Export</button>
+			<input type="file" id="importFile" accept="application/json" style="display:none">
+			<button id="importBtn">Import</button>
+			<button id="clearBtn">Clear All</button>
+		</div>
+
+		<!-- Search Bar -->
+		<div class="search-container">
+			<input type="text" id="searchInput" placeholder="Search accounts..." class="search-input">
+		</div>
+
+		<!-- Loading Spinner -->
+		<div id="loadingSpinner" class="loading-spinner" style="display: none;">
+			<div class="spinner"></div>
+		</div>
+
+		<!-- Toast Container -->
+		<div id="toastContainer" class="toast-container"></div>
+
+		<!-- Empty State -->
+		<div id="emptyState" class="empty-state" style="display: none;">
+			<div class="empty-icon">🔐</div>
+			<h3>No OTP Accounts</h3>
+			<p>Add your first OTP account to get started</p>
+			<div class="empty-actions">
+				<button id="emptyAddManual" class="btn-primary">Add Manually</button>
+				<button id="emptyUploadQR" class="btn-secondary">Upload QR Code</button>
+			</div>
+		</div>
+		<!-- Tabs -->
+		<div id="tabs"></div>
+		<!-- Account list -->
+		<div id="list"></div>
+		<template id="accountTpl">
+			<div class="account">
+				<div class="info">
+					<span class="label"></span>
+					<small class="issuer"></small>
+				</div>
+				<span class="code"></span>
+				<span class="time"></span>
+				<button class="edit">✎</button>
+				<button class="del">✕</button>
+			</div>
+		</template>
+		<script src="totp.js"></script>
+		<script src="jsqr.min.js"></script>
+		<script src="popup.js"></script>
+	</body>
+</html>
